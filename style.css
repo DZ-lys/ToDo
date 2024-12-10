@@ -64,3 +64,11 @@ body {
   display: flex;
   align-items: center;
 }
+.todoData {
+  background-color: grey;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  border-radius: 15px;
+  margin-top: 20px;
+}

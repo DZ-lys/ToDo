@@ -1,37 +1,12 @@
-{
-  /* <div class="todoList">
-        <div class="title">
-          <div class="circle"></div>
-          <h2>To do</h2>
-          <p class="count">5</p>
-        </div>
-        <div class="list">
-          <div class="listItem">
-            <p>[loan-managament] - Add card component</p>
-            <select name="" id="">
-              <option value="">In progress</option>
-              <option value="">Done</option>
-            </select>
-            <img src="./trash.svg" alt="" />
-          </div>
-          <div class="listItem">
-            <p>[loan-managament] - Add card component</p>
-            <select name="" id="">
-              <option value="">In progress</option>
-              <option value="">Done</option>
-            </select>
-            <img src="./trash.svg" alt="" />
-          </div>
-        </div>
-      </div> */
-}
-
 const containerItems = [
   {
     title: "To do",
     count: 5,
     color: "white",
     id:"todo",
+    task: "Geree tseverleh",
+    date: "2024-12-09",
+    state: "todo",
   },
   {
     title: "In progress",
@@ -55,19 +30,19 @@ const containerItems = [
 
 const todoData = [
   {
-    title: "Geree tseverleh",
+    task: "Geree tseverleh",
     date: "2024-12-09",
     state: "todo",
   },
   {
-    title: "Shine jildee yvah",
+    task: "Shine jildee yvah",
     date: "2024-12-09",
     state: "todo",
   },
   {
-    title: "Huvtssaa beldeh",
+    task: "Huvtssaa beldeh",
     date: "2024-12-09",
-    state: "todo",
+    state: "in-progress",
   },
 ];
 
@@ -75,6 +50,7 @@ function addTaskList(title, color, count, id) {
   const taskContainer2 = document.querySelector("#taskContainer");
   const todoList = document.createElement("div");
   todoList.setAttribute("class", "todoList");
+  todoList.setAttribute("id", id);
   const titleDiv = document.createElement("div");
   titleDiv.setAttribute("class", "title");
   todoList.appendChild(titleDiv);
@@ -88,11 +64,11 @@ function addTaskList(title, color, count, id) {
   taskContainer2.appendChild(todoList);
   const para = document.createElement("p");
   para.setAttribute("class", "count");
-  para.innerText = count
-  titleDiv.appendChild(para)
+  para.innerText = count;
+  titleDiv.appendChild(para);
 }
 
 containerItems.map((item) => {
-  addTaskList(item.title, item.color, item.count);
+  addTaskList(item.title, item.color, item.count, item.id);
 });
 
