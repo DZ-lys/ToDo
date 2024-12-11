@@ -31,23 +31,29 @@ const containerItems = [
 const todoData = [
   {
     task: "Geree tseverleh",
-    date: "2024-12-09",
     state: "todo",
   },
   {
     task: "Shine jildee yvah",
-    date: "2024-12-09",
     state: "todo",
   },
   {
     task: "Huvtssaa beldeh",
-    date: "2024-12-09",
     state: "in-progress",
   },
 ];
 
+const addTask = document.getElementById("addTask");
+const input = document.createElement("input")
+const addButton = document.createElement("button");
+input.setAttribute("class", "inputTask");
+addButton.setAttribute("class", "addButton");
+addButton.innerText = "Add task";
+addTask.appendChild(input);
+addTask.appendChild(addButton);
+
 function addTaskList(title, color, count, id) {
-  const taskContainer2 = document.querySelector("#taskContainer");
+  const taskContainer2 = document.getElementById("taskContainer");
   const todoList = document.createElement("div");
   todoList.setAttribute("class", "todoList");
   todoList.setAttribute("id", id);
@@ -71,4 +77,8 @@ function addTaskList(title, color, count, id) {
 containerItems.map((item) => {
   addTaskList(item.title, item.color, item.count, item.id);
 });
+
+todoData.map((item) => {
+
+})
 

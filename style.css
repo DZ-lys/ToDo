@@ -9,12 +9,11 @@ body {
   padding: 20px;
   color: white;
 }
-.addTask {
+.addTask{
   display: flex;
-  flex-direction: row-reverse;
-  margin-bottom: 20px;
+  justify-content: flex-end;
 }
-.addTask button {
+.addButton{
   width: 120px;
   height: 50px;
   background-color: green;
@@ -22,6 +21,7 @@ body {
   border-radius: 3px;
   border: none;
   font-size: large;
+  margin-bottom: 20px;
 }
 
 .taskContainer {
