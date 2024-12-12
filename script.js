@@ -27,49 +27,55 @@ const containerItems = [
 
 const todoData = [
   {
-    task: "Tidy the flat",
+    title: "Geree tseverleh",
+    date: "2024-12-09",
     state: "todo",
   },
   {
-    task: "Attend the new years event",
+    title: "Shine jildee yvah",
+    date: "2024-12-09",
     state: "todo",
   },
   {
-    task: "Get ready to dress",
-    state: "in-progress",
+    title: "Huvtssaa beldeh",
+    date: "2024-12-09",
+    state: "todo",
   },
   {
-    task: "go to class",
+    title: "Usand oroh",
+    date: "2024-12-09",
     state: "done",
   },
   {
-    task: "get some sleep",
+    title: "Showuudah",
+    date: "2024-12-09",
     state: "blocked",
   },
 ];
 
-function addButton () {
-  const addTask = document.getElementById("addTask");
-  const input = document.createElement("input")
-  const addButton = document.createElement("button");
-  input.setAttribute("class", "inputTask");
-  input.setAttribute("id", "input");
-  addButton.setAttribute("class", "addButton");
-  addButton.setAttribute("id", "button");
-  addButton.innerText = "Add task";
-  addTask.appendChild(input);
-  addTask.appendChild(addButton);
-}
+const options = ["done", "in-progress", "done", "blocked"];
 
-addButton();
+const clearContainers = () => {
+  const container1 = document.getElementById("todo");
+  const container2 = document.getElementById("in-progress");
+  const container3 = document.getElementById("done");
+  const container4 = document.getElementById("blocked");
+  container1.innerHTML = null;
+  container2.innerHTML = null;
+  container3.innerHTML = null;
+  container4.innerHTML = null;
+};
 
-function addTaskList(title, color, count, id) {
-  const taskContainer = document.getElementById("taskContainer");
+function renderContainers(title, color, count, id) {
+  const taskContainer2 = document.querySelector("#taskContainer");
   const todoList = document.createElement("div");
   todoList.setAttribute("class", "todoList");
-  todoList.setAttribute("id", id);
+  const listItemParent = document.createElement("div");
+  listItemParent.setAttribute("id", id);
   const titleDiv = document.createElement("div");
   titleDiv.setAttribute("class", "title");
+  todoList.appendChild(titleDiv);
+  todoList.appendChild(listItemParent);
   const h2 = document.createElement("h2");
   h2.innerText = title;
   const cirlce = document.createElement("div");
@@ -78,119 +84,70 @@ function addTaskList(title, color, count, id) {
   const para = document.createElement("p");
   para.setAttribute("class", "count");
   para.innerText = count;
-  taskContainer.appendChild(todoList);
-  todoList.appendChild(titleDiv);
   titleDiv.appendChild(cirlce);
   titleDiv.appendChild(h2);
   titleDiv.appendChild(para);
+  taskContainer2.appendChild(todoList);
 }
 
 containerItems.map((item) => {
-  addTaskList(item.title, item.color, item.count, item.id);
+  renderContainers(item.title, item.color, item.count, item.id);
 });
 
-function addTasksTodo(task) {
-  const todo = document.getElementById("todo");
-  const tasks = document.createElement("div");
-  tasks.setAttribute("class", "tasks");
-  const p = document.createElement("p");
-  p.setAttribute("class", "task");
-  p.innerText = task;
-  todo.appendChild(tasks)
-  tasks.appendChild(p);
-}
-
-function addTaskInProgress(task) {
-  const todo = document.getElementById("in-progress");
-  const tasks = document.createElement("div");
-  tasks.setAttribute("class", "tasks");
-  const p = document.createElement("p");
-  p.innerText = task;
-  todo.appendChild(tasks)
-  tasks.appendChild(p);
-}
-
-function addTasksDone(task) {
-  const todo = document.getElementById("done");
-  const tasks = document.createElement("div");
-  tasks.setAttribute("class", "tasks");
-  const p = document.createElement("p");
-  p.setAttribute("class", "task");
-  p.innerText = task;
-  todo.appendChild(tasks)
-  tasks.appendChild(p);
-}
-
-function addTaskInBlocked(task) {
-  const todo = document.getElementById("blocked");
-  const tasks = document.createElement("div");
-  tasks.setAttribute("class", "tasks");
-  const p = document.createElement("p");
-  p.setAttribute("class", "task");
-  p.innerText = task;
-  todo.appendChild(tasks)
-  tasks.appendChild(p);
-}
-
-const todo = todoData.filter((task) => {
-  return task.state === "todo";
-});
-
-const inProgress = todoData.filter((task) => {
-  return task.state === "in-progress";
-});
-
-const done = todoData.filter((task) => {
-  return task.state === "done";
-});
-
-const blocked = todoData.filter((task) => {
-  return task.state === "blocked";
-});
-
-todo.map((task) => {
-  addTasksTodo(task.task);
-});
-
-inProgress.map((task) => {
-  addTaskInProgress(task.task);
-});
-
-done.map((task) => {
-  addTasksDone(task.task);
-});
-
-blocked.map((task) => {
-  addTaskInBlocked(task.task);
-});
-
-function input() {
-  const input = document.getElementById("input");
-  const button = document.getElementById("button");
-  let inputVal;
-  input.addEventListener("input", (e) => {
-    inputVal = e.target.value;
+const deleteTodo = (index) => {
+  console.log("Ymar index", index);
+  todoData.splice(index, 1);
+  clearContainers();
+  todoData.map((item, index) => {
+    renderTodoItems(item.title, item.date, item.state, index);
   });
-  button.addEventListener("click", () => {
-    todoData.push({task:inputVal, state:"todo"});
-    addNewTask();
-    input.value = null;
-  })
-  function addNewTask() {
-    const todo = document.getElementById("todo");
-    todo.innerHTML = null;
-    const filteredInput = todoData.filter((state) => {
-      return state.state === "todo";
+};
+
+const renderTodoItems = (title, date, state, index) => {
+  console.log(title, index);
+  const container = document.getElementById(state);
+  const listItem = document.createElement("div");
+  const text = document.createElement("p");
+  const deleteButton = document.createElement("button");
+  deleteButton.innerText = "x";
+  deleteButton.setAttribute("id", index);
+  deleteButton.addEventListener("click", () => {
+    deleteTodo(index);
+  });
+  listItem.appendChild(deleteButton);
+  text.innerText = title;
+  listItem.appendChild(text);
+  listItem.setAttribute("class", "listItem");
+  listItem.setAttribute("id", "listItem");
+  container.appendChild(listItem);
+  const select = document.createElement("select");
+  options.map((text) => {
+    const option = document.createElement("option");
+    option.innerText = text;
+    select.appendChild(option);
+  }) 
+  listItem.appendChild(select);
+};
+
+todoData.map((item, index) => {
+  renderTodoItems(item.title, item.date, item.state, index);
+});
+
+const addTask = () => {
+  if (input.value) {
+    todoData.push({
+      title: input.value,
+      date: "2024-12-12",
+      state: "todo",
     });
-    filteredInput.map((task) => {
-      const newTask = document.createElement("div");
-      newTask.setAttribute("class", "tasks");
-      const p = document.createElement("p");
-      p.setAttribute("class", "task");
-      p.innerText = task.task;
-      todo.appendChild(newTask);
-      newTask.appendChild(p);
-    })
+    input.value = null;
+    clearContainers();
+    todoData.map((item, index) => {
+      renderTodoItems(item.title, item.date, item.state, index);
+    });
   }
-}
-input();
+};
+
+const input = document.getElementById("input");
+const addButton = document.getElementById("button");
+addButton.addEventListener("click", addTask);
