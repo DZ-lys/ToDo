@@ -27,28 +27,23 @@ const containerItems = [
 
 const todoData = [
   {
-    title: "Geree tseverleh",
-    date: "2024-12-09",
+    title: "clean my flat",
     state: "todo",
   },
   {
-    title: "Shine jildee yvah",
-    date: "2024-12-09",
+    title: "attend the christmas party",
     state: "todo",
   },
   {
-    title: "Huvtssaa beldeh",
-    date: "2024-12-09",
-    state: "todo",
+    title: "prepare my outfit",
+    state: "in-progress",
   },
   {
-    title: "Usand oroh",
-    date: "2024-12-09",
+    title: "take a shower",
     state: "done",
   },
   {
-    title: "Showuudah",
-    date: "2024-12-09",
+    title: "sleep",
     state: "blocked",
   },
 ];
@@ -67,7 +62,7 @@ const clearContainers = () => {
 };
 
 function renderContainers(title, color, count, id) {
-  const taskContainer2 = document.querySelector("#taskContainer");
+  const taskContainer = document.querySelector("#taskContainer");
   const todoList = document.createElement("div");
   todoList.setAttribute("class", "todoList");
   const listItemParent = document.createElement("div");
@@ -87,7 +82,7 @@ function renderContainers(title, color, count, id) {
   titleDiv.appendChild(cirlce);
   titleDiv.appendChild(h2);
   titleDiv.appendChild(para);
-  taskContainer2.appendChild(todoList);
+  taskContainer.appendChild(todoList);
 }
 
 containerItems.map((item) => {
@@ -95,15 +90,14 @@ containerItems.map((item) => {
 });
 
 const deleteTodo = (index) => {
-  console.log("Ymar index", index);
   todoData.splice(index, 1);
   clearContainers();
   todoData.map((item, index) => {
-    renderTodoItems(item.title, item.date, item.state, index);
+    renderTodoItems(item.title, item.state, index);
   });
 };
 
-const renderTodoItems = (title, date, state, index) => {
+const renderTodoItems = (title, state, index) => {
   console.log(title, index);
   const container = document.getElementById(state);
   const listItem = document.createElement("div");
@@ -130,20 +124,19 @@ const renderTodoItems = (title, date, state, index) => {
 };
 
 todoData.map((item, index) => {
-  renderTodoItems(item.title, item.date, item.state, index);
+  renderTodoItems(item.title, item.state, index);
 });
 
 const addTask = () => {
   if (input.value) {
     todoData.push({
       title: input.value,
-      date: "2024-12-12",
       state: "todo",
     });
     input.value = null;
     clearContainers();
     todoData.map((item, index) => {
-      renderTodoItems(item.title, item.date, item.state, index);
+      renderTodoItems(item.title, item.state, index);
     });
   }
 };
